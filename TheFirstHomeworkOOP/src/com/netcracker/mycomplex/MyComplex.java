@@ -40,19 +40,11 @@ public class MyComplex {
     }
 
     public boolean isReal(){
-        boolean isReal = true;
-        if(real == 0.0){
-            return false;
-        }
-        return  isReal;
+        return (imag == 0.0);
     }
 
     public boolean isImaginary(){
-        boolean isImaginary = true;
-        if(imag == 0.0){
-            return false;
-        }
-        return  isImaginary;
+        return (real == 0.0);
     }
 
     public boolean equals(double real, double imag){
