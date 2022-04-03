@@ -1,5 +1,7 @@
 package com.netcracker.circle;
 
+import java.util.Objects;
+
 public class Circle {
 
     private double radius = 1.0;
@@ -43,5 +45,25 @@ public class Circle {
 
     public double getArea(){
         return Math.PI * Math.pow(radius,2);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Circle)){
+            return false;
+        }
+        Circle circle = (Circle) o;
+        return Double.compare(circle.radius, radius) == 0 && Objects.equals(color, circle.color);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + (int)(Double.doubleToLongBits(radius)^(Double.doubleToLongBits(radius)>>>32));
+        result = 31*result + color.hashCode();
+        return result;
     }
 }

@@ -10,6 +10,8 @@ import com.netcracker.mypolynomial.MyPolynomial;
 import com.netcracker.mytriangle.MyTriangle;
 import com.netcracker.rectangle.Rectangle;
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args){
 
@@ -63,9 +65,9 @@ public class Main {
         System.out.println(triangle.getType());*/
 
         //MyComplex class
-/*        System.out.println("========MyTriangle class========");
+        /*System.out.println("========MyTriangle class========");
         MyComplex complex0 = new MyComplex();
-        MyComplex complex1 = new MyComplex(5,12);
+        MyComplex complex1 = new MyComplex(0,12);
         System.out.println(complex1);
         System.out.println(complex1.isReal());
         System.out.println(complex1.isImaginary());
@@ -97,7 +99,7 @@ public class Main {
         System.out.println(polynomial1.multiply(polynomial2));*/
 
         //Ball class
-/*        System.out.println("========Ball class========");
+        /*System.out.println("========Ball class========");
         Container container = new Container(0,0,10,10);
         Ball ball = new Ball(5,5,3,2,30);
         System.out.println(container);
@@ -109,5 +111,19 @@ public class Main {
         ball.move();
         System.out.println(ball);
         System.out.println(container.collides(ball));*/
+
+        //A Bouncing Ball on a Playground
+        System.out.println("========Ball Bouncing on the Playground========");
+        Container container = new Container(0,0,1000,800);
+        Ball ball = new Ball(400,400,200,20,30);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new JFrame("A Bouncing Ball on a Playground");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setContentPane(new Playground(container,ball));
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
     }
 }

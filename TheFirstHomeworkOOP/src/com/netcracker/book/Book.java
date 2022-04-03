@@ -1,5 +1,8 @@
 package com.netcracker.book;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Book {
 
     private String name;
@@ -68,5 +71,28 @@ public class Book {
             }
         }
         return authorNames.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Book)){
+            return false;
+        }
+        Book book = (Book) o;
+        return Double.compare(book.price, price) == 0 && qty == book.qty
+                && Objects.equals(name, book.name) && Arrays.equals(authors, book.authors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + name.hashCode();
+        result = 31*result + Arrays.hashCode(authors);
+        result = 31*result + (int)(Double.doubleToLongBits(price)^(Double.doubleToLongBits(price)>>>32));
+        result = 31*result + qty;
+        return result;
     }
 }

@@ -1,11 +1,10 @@
 package com.netcracker.mypolynomial;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MyPolynomial {
 
     private double[] coeffs;
-    private int n = 0;
 
     public MyPolynomial(double coeffs[]) {
         this.coeffs = coeffs;
@@ -29,7 +28,6 @@ public class MyPolynomial {
     @Override
     public String toString(){
         StringBuilder polynomial = new StringBuilder();
-        //String polynomial = "";
         if (coeffs.length>0){
             if (coeffs.length>1){
                 for(int i=coeffs.length-1; i > 1; i--){
@@ -68,7 +66,7 @@ public class MyPolynomial {
         return new MyPolynomial(coeffsAdd);
     }
 
-   public MyPolynomial multiply(MyPolynomial right){
+    public MyPolynomial multiply(MyPolynomial right){
         double [] coeffsMultiply = new double[coeffs.length + right.coeffs.length - 1];
         for(int i=0;i < coeffs.length;++i){
             for(int j=0;j < right.coeffs.length;++j){
@@ -76,5 +74,24 @@ public class MyPolynomial {
             }
         }
         return new MyPolynomial(coeffsMultiply);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof MyPolynomial)){
+            return false;
+        }
+        MyPolynomial that = (MyPolynomial) o;
+        return Arrays.equals(coeffs, that.coeffs);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + Arrays.hashCode(coeffs);
+        return result;
     }
 }

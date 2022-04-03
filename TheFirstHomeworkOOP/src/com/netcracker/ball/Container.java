@@ -32,19 +32,37 @@ public class Container {
     }
 
     public boolean collides(Ball ball){
-        boolean isInsideBox = false;
-        if(((ball.getX()-ball.getRadius()) >= x1) &&
-                ((ball.getX()+ball.getRadius()) <= x2) &&
-                ((ball.getY()-ball.getRadius()) >= y1) &&
-                ((ball.getY()+ball.getRadius()) <= y2)){
-            isInsideBox = true;
-        }
-        return isInsideBox;
+        return ((ball.getX()-ball.getRadius()) < x1) ||
+                ((ball.getX()+ball.getRadius()) > x2) ||
+                ((ball.getY()-ball.getRadius()) < y1) ||
+                ((ball.getY()+ball.getRadius()) > y2);
     }
 
     @Override
     public String toString(){
         return "Container[(" + x1 +"," + y1 +
                 "),(" + x2 + "," + y2 + ")]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Container)){
+            return false;
+        }
+        Container container = (Container) o;
+        return x1 == container.x1 && y1 == container.y1 && x2 == container.x2 && y2 == container.y2;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + x1;
+        result = 31*result + y1;
+        result = 31*result + x2;
+        result = 31*result + y2;
+        return result;
     }
 }

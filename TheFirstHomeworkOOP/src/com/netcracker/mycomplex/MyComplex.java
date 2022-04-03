@@ -108,4 +108,24 @@ public class MyComplex {
     public MyComplex conjugate(){
         return new MyComplex(real,-imag);//a+bi -> a-bi
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof MyComplex)){
+            return false;
+        }
+        MyComplex complex = (MyComplex) o;
+        return Double.compare(complex.real, real) == 0 && Double.compare(complex.imag, imag) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + (int)(Double.doubleToLongBits(real)^(Double.doubleToLongBits(real)>>>32));
+        result = 31*result + (int)(Double.doubleToLongBits(imag)^(Double.doubleToLongBits(imag)>>>32));
+        return result;
+    }
 }

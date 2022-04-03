@@ -1,5 +1,7 @@
 package com.netcracker.employee;
 
+import java.util.Objects;
+
 public class Employee {
 
     private int id;
@@ -53,5 +55,28 @@ public class Employee {
                 ",name=" + getName() +
                 ",salary=" + salary +
                 "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Employee)){
+            return false;
+        }
+        Employee employee = (Employee) o;
+        return id == employee.id && salary == employee.salary
+                && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31*result + id;
+        result = 31*result + firstName.hashCode();
+        result = 31*result + lastName.hashCode();
+        result = 31*result + salary;
+        return result;
     }
 }
